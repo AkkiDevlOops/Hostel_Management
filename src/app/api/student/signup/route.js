@@ -13,7 +13,7 @@ export async function POST(req) {
   
   
  try {
-  const user = await prisma.student.create({
+  const user = await prisma.Student.create({
     data: {
       name: data.name,
       email: data.email,

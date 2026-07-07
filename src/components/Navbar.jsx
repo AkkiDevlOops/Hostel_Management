@@ -1,10 +1,42 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+// import { useUser } from '@/context/UserContext';
+import { getUser } from '@/lib/getuser';
+import { underwork } from '@/lib/underwork';
 
 export default function Navbar() {
+
+     async function handleissue() {
+        underwork()
+    } 
+
+    const [admin,setadmin] = useState();
+    // const {user} = useUser();
+
+        useEffect(()=>{
+          async function getUser() {
+              const response = await fetch("/api/student/profile", {
+            method: "GET",
+            // body: JSON.stringify(),
+        })
+        const data = await response.json();
+        
+        console.log(data.student);
+        if(data.message === "Welcome!"){
+            setadmin(data.student.name);
+            console.log(data.student.name)
+        }
+          }
+        
+          getUser();
+        },[]);
+
+        
+
   return (
     <div>
          <nav  className=" top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-lg py-4">
+         {/* <p>{user?`hello ${user.Name}`:"login"}</p> */}
         <div  className="max-w-7xl mx-auto px-5">
             <div  className="flex justify-between items-center">
 
@@ -25,8 +57,10 @@ export default function Navbar() {
                         </li>
 
                         <li>
-                            <a href="#services"  className="flex items-center gap-2 text-gray-700 font-medium hover:text-indigo-500 transition">
-                                Complaint
+                            <a 
+                            href="/complaints"
+                              className="flex items-center gap-2 text-gray-700 font-medium hover:text-indigo-500 transition">
+                                Complaints
                             </a>
                         </li>
 
@@ -37,8 +71,8 @@ export default function Navbar() {
                         </li>
 
                         <li>
-                            <a href="#"  className="flex items-center gap-2 text-gray-700 font-medium hover:text-indigo-500 transition">
-                            
+                            <a href={admin?"/Attendancewindow":"/Qrscan"}  className="flex items-center gap-2 text-gray-700 font-medium hover:text-indigo-500 transition">
+                            {admin?"Attendance QR":"Attendance"}
                             </a>
                         </li>
 
@@ -52,10 +86,11 @@ export default function Navbar() {
                     
 
                     <button 
+                    onClick={handleissue}
                          className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-indigo-50 hover:text-indigo-500 transition font-medium"
                          >
                         <i  className="fas fa-user"></i>
-                        <span id="username">John Doe</span>
+                        <span id="username">{admin}</span>
                     </button>
                     <div  className="bg-while rounded-full w-5 h-5 border-black border-2"></div>
                 </div>

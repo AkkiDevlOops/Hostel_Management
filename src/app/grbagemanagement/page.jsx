@@ -24,6 +24,11 @@ export default function grbagemanagement(){
 const [img,setimg] = useState();
 const [pimg,setpimg] = useState(false);
 const [preview,setpreview] = useState();
+const [field1, setfield1] = useState("");
+const [field2, setfield2] = useState("");
+const [field3, setfield3] = useState("");
+const [user,setUser] = useState("");
+const [complainid, setComplainid] = useState("");
  
 // async function handleimage(e) {
 //   e.preventDefault();
@@ -36,24 +41,74 @@ const [preview,setpreview] = useState();
 //   console.log(url);
 // }
 
-async function handleimg (e) {
-    try{
-    
-    const file = Array.from(e.target.files);
-    setimg(file);
-    const url = file.map(file=>URL.createObjectURL(file))
-    setpimg(true)
-    setpreview(url)               
-    }catch(error){
-      console.log(error);
-    }  
+const formData = new FormData();
+formData.append("field1",field1);
+formData.append("field2",field2);
+formData.append("field3",field3);
+// formData.append("image",img);
+
+
+async function getid() {
+  try{
+  const response = await fetch("/api/student/session",{
+    method: "POST",
+    headers : {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify()
+  })
+  const data = await response.json()
+  console.log(data.student);
+}catch(err){
+  console.log(err);
 }
+}
+
+
+
+
+
+async function submitHandler(e) {
+  e.preventDefault();
+  try {
+    const response = await fetch("/api/student/garbage",{
+      method: "POST",
+      
+    
+    body : 
+        formData,
+      
+  })
+  const data = await response.json();
+  if(data){
+    setComplainid(data.date);
+    alert(data.msg);
+  }
+
+} catch (error) {
+    console.log(error);
+  }
+}
+
+// async function handleimg (e) {
+//     try{
+    
+//     const file = Array.from(e.target.files);
+//     setimg(file);
+//     const url = file.map(file=>URL.createObjectURL(file))
+//     setpimg(true)
+//     setpreview(url)               
+//     }catch(error){
+//       console.log(error);
+//     }  
+// }
 
 
   return (
     
       <>
       <div className='overflow-x-hidden'>
+        
       <Navbar/>
     <main className="min-h-screen pt-7 bg-gray-100 flex items-center justify-center px-4">
       <div className="w-full max-w-2xl rounded-2xl bg-white p-8 shadow-lg">
@@ -64,7 +119,7 @@ async function handleimg (e) {
           Garbage Management System
         </h1>
      
-        <div className='w-1/4 mt-5 h-15 text-center flex justify-center items-center mx-auto bg-blue-300 text-white rounded-full border '>
+        {/* <div className='w-1/4 mt-5 h-15 text-center flex justify-center items-center mx-auto bg-blue-300 text-white rounded-full border '>
         <label className='font-bold text-white '>
         Upload image
         <input
@@ -73,7 +128,7 @@ async function handleimg (e) {
     accept='image'
     capture="environment"
     className='hidden'    ></input>
-      </label></div>
+      </label></div> */}
         
         <p className="mt-2 text-center text-gray-500">
           Report garbage details for proper waste management
@@ -83,7 +138,7 @@ async function handleimg (e) {
 
         </div>
 
-        <form  className="mt-8 space-y-6">
+        <form onSubmit={submitHandler} className="mt-8 space-y-6">
           {/* Garbage Type */}
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700">
@@ -92,7 +147,7 @@ async function handleimg (e) {
 
             <select
               name="garbageType"
-             
+             onChange={(e)=>setfield1(e.target.value)}
               required
               className="w-full rounded-xl border border-gray-300 p-3 outline-none focus:border-green-500"
             >
@@ -114,7 +169,7 @@ async function handleimg (e) {
 
             <textarea
               name="description"
-              
+              onChange={(e)=>setfield2(e.target.value)}
               required
               rows={5}
               placeholder="Enter garbage details..."
@@ -125,24 +180,24 @@ async function handleimg (e) {
           {/* Location */}
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700">
-              Location
+             where is it Located?
             </label>
-
+            
             <input
               type="text"
               name="location"
-              
+              onChange={(e)=>setfield3(e.target.value)}
               required
               placeholder="Enter location"
               className="w-full rounded-xl border border-gray-300 p-3 outline-none focus:border-green-500"
             />
           </div>
 
-          {pimg &&(
+          {/* {pimg &&(
             <div className='w-full h- mx-55  justify-center'>
               <img className='h-35' src={preview}/>
             </div>
-          )}
+          )} */}
 
           {/* <button className='bg-red-600' onClick=>
           <a href='https://www.google.com/maps?q=${userLocation.lat},${userLocation.lng}'></a>

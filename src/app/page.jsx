@@ -1,20 +1,50 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { NextResponse } from "next/server";
+// const { user } = useUser();
+import { underwork } from "@/lib/underwork";
 
 
 export default function Home() {
-
+      const [admin, setadmin] = useState(false);
       const [open, setOpen] = useState(true);
-      const [isLogin, setIsLogin] = useState(false);
+      const [isLogin, setIsLogin] = useState(true);
       const [email, setemail] = useState("");
       const [name, setname] = useState("");
       const [Enrollment, setEnrollment] = useState("");
       const [password, setpassword] = useState("");
+      const [sid,setsid] = useState("");
+      const [ssid,setssid] = useState("");
+      const [user,setUser] = useState("");
 
-    async function submitHandler(e){
+    //getUser
+    useEffect(()=>{
+      async function getUser() {
+          const response = await fetch("/api/student/profile", {
+        method: "GET",
+        // body: JSON.stringify(),
+    })
+    const data = await response.json();
+    
+    console.log(data.student);
+    if(data.message === "Welcome!"){
+        setOpen(false);
+        setIsLogin(true);
+        console.log(open,isLogin);
+    }
+      }
+    
+      getUser();
+    },[]);
+
+    async function handleissue() {
+            underwork()
+        } 
+
+    
+      async function submitHandler(e){
         e.preventDefault();
          const url = isLogin
          ? "/api/student/login"
@@ -37,10 +67,12 @@ export default function Home() {
             const data = await response.json();
 
                 if (data) {
-                    // localStorage.setItem("token",data.token);
-                    // console.log(token);
+             // localStorage.setItem("token",data.token);
+            // console.log(token);
             alert(data.msg)
-
+            setsid(data.sid);
+        //    getUser();
+    
             if(data.msg=="User created"){
                 setIsLogin(true)
             }
@@ -48,7 +80,9 @@ export default function Home() {
             if(data.msg=="Login success"){
                 setOpen(false);
                 setIsLogin(true);
+                // getuser(data.sid);
                 console.log("done")
+                
             }
         }
         } catch (error) {
@@ -270,6 +304,7 @@ export default function Home() {
                     </p>
 
                     <button 
+                    onClick={underwork}
                          className="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition">
                         Explore
                     </button>
@@ -290,6 +325,7 @@ export default function Home() {
                     </p>
 
                     <button
+                    onClick={underwork}
                          className="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition">
                         Explore
                     </button>
@@ -310,6 +346,7 @@ export default function Home() {
                     </p>
 
                     <button 
+                    onClick={underwork}
                          className="bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition">
                         Explore
                     </button>

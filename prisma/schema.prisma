@@ -13,6 +13,7 @@ model Student {
   email String @unique
   Enrollment String @unique
   password String 
+  sessions Session[]
   createdAt DateTime @default(now())
 }
 
@@ -25,3 +26,19 @@ model attendanceqr{
   expiresAt DateTime 
 }
 
+model Garbage{
+  id String @unique @id
+  Garbage_type String
+  Description String
+  Location String
+  imageUrl String?
+  createdAT DateTime @default(now())
+}
+
+  model Session{
+    id String @id
+    studentId String @unique
+    student  Student  @relation(fields: [studentId], references: [id]) //not a column a relation
+    createdAt DateTime @default(now())
+    expiresAt DateTime
+  }
