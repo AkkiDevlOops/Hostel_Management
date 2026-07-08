@@ -35,7 +35,7 @@ export default function Home() {
             setIsLogin(true);
             setUser(student.name);
             console.log(open,isLogin);
-        } catch (error) {
+        } catch (err) {
           console.log(err);
         }
         })
