@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 // import { useUser } from '@/context/UserContext';
-import { getUser } from '@/lib/getuser';
 import { underwork } from '@/lib/underwork';
+import { useAuth } from '@/context/context';
 
 export default function Navbar() {
-
+    const {student,loading} = useAuth();
      async function handleissue() {
         underwork()
     } 
@@ -13,23 +13,19 @@ export default function Navbar() {
     const [admin,setadmin] = useState();
     // const {user} = useUser();
 
-        useEffect(()=>{
-          async function getUser() {
-              const response = await fetch("/api/student/profile", {
-            method: "GET",
-            // body: JSON.stringify(),
-        })
-        const data = await response.json();
-        
-        console.log(data.student);
-        if(data.message === "Welcome!"){
-            setadmin(data.student.name);
-            console.log(data.student.name)
+          useEffect(()=>{
+        try {
+         
+        if (loading) {
+          console.log("Loading authentication data...");
+      }
+          console.log(student);
+            setadmin(student?.name)
+            console.log(admin);
+        } catch (err) {
+          console.log(err);
         }
-          }
-        
-          getUser();
-        },[]);
+        })
 
         
 

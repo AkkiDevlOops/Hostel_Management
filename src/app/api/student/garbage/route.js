@@ -7,6 +7,8 @@ export async function POST(req) {
         const field1 = formData.get("field1");
         const field2 = formData.get("field2");
         const field3 = formData.get("field3");
+       
+        const date = new Date().toString();
         
        const complain = await prisma.Garbage.create({
             data:{

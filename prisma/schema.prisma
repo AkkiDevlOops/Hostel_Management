@@ -10,7 +10,7 @@ datasource db {
 model Student {
   id String @unique @id @default(cuid())
   name  String
-  email String @unique
+  email String 
   Enrollment String @unique
   password String 
   sessions Session[]

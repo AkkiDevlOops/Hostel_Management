@@ -5,9 +5,11 @@ import Navbar from "@/components/Navbar";
 import { NextResponse } from "next/server";
 // const { user } = useUser();
 import { underwork } from "@/lib/underwork";
+import { useAuth } from "@/context/context";
 
 
 export default function Home() {
+      const { student,loading } = useAuth();
       const [admin, setadmin] = useState(false);
       const [open, setOpen] = useState(true);
       const [isLogin, setIsLogin] = useState(true);
@@ -19,25 +21,41 @@ export default function Home() {
       const [ssid,setssid] = useState("");
       const [user,setUser] = useState("");
 
-    //getUser
-    useEffect(()=>{
-      async function getUser() {
-          const response = await fetch("/api/student/profile", {
-        method: "GET",
-        // body: JSON.stringify(),
-    })
-    const data = await response.json();
-    
-    console.log(data.student);
-    if(data.message === "Welcome!"){
-        setOpen(false);
-        setIsLogin(true);
-        console.log(open,isLogin);
-    }
+      
+   
+        
+        useEffect(()=>{
+        try {
+         
+        if (loading) {
+          console.log("Loading authentication data...");
       }
+          console.log(student);
+            setOpen(false);
+            setIsLogin(true);
+            console.log(open,isLogin);
+        } catch (error) {
+          console.log(err);
+        }
+        })
+
+    //getUser
+    // useEffect(()=>{
+    //   async function getUser() {
+    //       const response = await fetch("/api/student/profile", {
+    //     method: "GET",
+    //     // body: JSON.stringify(),
+    // })
+    // const data = await response.json();
     
-      getUser();
-    },[]);
+    // console.log(data.student);
+    // if(data.message === "Welcome!"){
+    //     
+    // }
+    //   }
+    
+    //   getUser();
+    // },[]);
 
     async function handleissue() {
             underwork()
@@ -67,11 +85,7 @@ export default function Home() {
             const data = await response.json();
 
                 if (data) {
-             // localStorage.setItem("token",data.token);
-            // console.log(token);
             alert(data.msg)
-            setsid(data.sid);
-        //    getUser();
     
             if(data.msg=="User created"){
                 setIsLogin(true)
@@ -81,8 +95,7 @@ export default function Home() {
                 setOpen(false);
                 setIsLogin(true);
                 // getuser(data.sid);
-                console.log("done")
-                
+                console.log("done")       
             }
         }
         } catch (error) {

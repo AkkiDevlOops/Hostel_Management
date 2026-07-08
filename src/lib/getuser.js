@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 
 export async function getUser() {
@@ -5,8 +6,15 @@ export async function getUser() {
         method: "GET",
     })
     const data = await response.json();
-
-        return(data);
+    if(!response.ok){
+        throw new Error(response.status,response.json)
+    }
     
+    
+    const student = data.session.session.student;
+    // if(response.ok){
+    //  console.log(student)
+        return student;
+    // }
       
       }
