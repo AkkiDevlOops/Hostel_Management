@@ -7,6 +7,9 @@ export async function POST(req) {
         const field1 = formData.get("field1");
         const field2 = formData.get("field2");
         const field3 = formData.get("field3");
+        const name = formData.get("name");
+
+        console.log(name);
        
         const date = new Date().toString();
         
@@ -16,12 +19,12 @@ export async function POST(req) {
                 Garbage_type: field1,
                 Description: field2,
                 Location: field3,
+                name : name,
             }
        })
        console.log("user created");
         return NextResponse.json({
             msg: "Complaint sent",
-            student : student
         })
     }catch(error){
         console.log(error)

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from "next/image";
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
@@ -30,6 +30,7 @@ const [preview,setpreview] = useState();
 const [field1, setfield1] = useState("");
 const [field2, setfield2] = useState("");
 const [field3, setfield3] = useState("");
+const [name, setname] = useState("");
 const [user,setUser] = useState("");
 const [complainid, setComplainid] = useState("");
  
@@ -48,6 +49,7 @@ const formData = new FormData();
 formData.append("field1",field1);
 formData.append("field2",field2);
 formData.append("field3",field3);
+formData.append("name",name);
 // formData.append("image",img);
 
  try {
@@ -56,14 +58,10 @@ formData.append("field3",field3);
           console.log("Loading authentication data...");
       }
           console.log(student);
-            // setadmin(student?.name)
-            // console.log(admin);
+            
         } catch (err) {
           console.log(err);
         }
-
-
-
 
 
 async function submitHandler(e) {
@@ -81,6 +79,7 @@ async function submitHandler(e) {
   if(data){
     setComplainid(data.date);
     alert(data.msg);
+    console.log(data);
   }
 
 } catch (error) {
@@ -101,14 +100,17 @@ async function submitHandler(e) {
 //       console.log(error);
 //     }  
 // }
-
+ useEffect(()=>{
+          if(!loading && student){
+            setname(student?.id)
+          }
+        },[student,loading])
 
   return (
     
       <>
       <div className='overflow-x-hidden'>
         
-      <Navbar/>
     <main className="min-h-screen pt-7 bg-gray-100 flex items-center justify-center px-4">
       <div className="w-full max-w-2xl rounded-2xl bg-white p-8 shadow-lg">
 
@@ -133,11 +135,11 @@ async function submitHandler(e) {
           Report garbage details for proper waste management
         </p>
 
-        <div>
-
+        <div className=' m-2 text-center'>
+          <p>{student?.name}</p>
         </div>
 
-        <form onSubmit={submitHandler} className="mt-8 space-y-6">
+        <form onSubmit={submitHandler} className="mt-5 space-y-6">
           {/* Garbage Type */}
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700">

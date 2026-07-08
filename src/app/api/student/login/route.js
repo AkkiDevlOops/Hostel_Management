@@ -30,8 +30,16 @@ if(!student){
     });
 }
 
-const sid = student[0].id;
+
 console.log(student[0].id);
+
+let sid;
+
+if(student){
+  sid = student[0].id;
+}else{
+  return NextResponse({msg :"Student was not found"})
+}
 
 
 const expire = new Date(Date.now() + 24*60*60*1000);
@@ -66,11 +74,14 @@ if(alreadysession){
 }
 
 
+
+
+
 if(!alreadysession){
 await prisma.Session.create({
   data : {
     id : sessionId,
-    studentId : student.id,
+    studentId : sid,
     expiresAt : expire,
   }
 })

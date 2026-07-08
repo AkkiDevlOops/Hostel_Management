@@ -15,28 +15,42 @@ export default function Qrscan() {
   useEffect(()=>{
     if (student) {
     setworking(true);
+    
 }
   })
-  
+
   try {
    
   if (loading) {
     return <div>Loading authentication data...</div>;
 }
-    console.log(student);
   } catch (err) {
     console.log(err);
   }
 
-  const getQRvalue= ()=> {
-    if(!QRdata){
+  const getQRvalue= (value)=> {
+    if(!value){
       console.log("no value found");
-  
-}
-console.log(QRdata[0].rawValue)
+}console.log(value[0].rawValue)
+CheckQR(value[0].rawValue);
   }
 
-console.log(useAuth());
+async function CheckQR(qrdata) {
+  const response = await fetch("/api/student/Qrscan",{
+   method:"POST",
+   headers: {
+  "Content-Type": "application/json",
+    },
+   body : JSON.stringify({
+    data: qrdata
+  }),
+ });
+  const data = await response.json();
+  alert(data.msg);
+}
+
+  
+
   return (
     <div className="min-h-screen bg-gray-100 pt-6">      {working&&(
         <h1 className="font-bold ml-7 from-neutral-00 text-gray-900 text-3xl">{student.name} Daily Attendance</h1>
@@ -54,7 +68,7 @@ console.log(useAuth());
       facingMode: "environment",
     },
   }}
-        onScan={(result)=>setQRdata(result)}
+        onScan={(result)=>getQRvalue(result)}
         ></Scanner>
         <button onClick={()=>getQRvalue()}>get data</button>
         </div>

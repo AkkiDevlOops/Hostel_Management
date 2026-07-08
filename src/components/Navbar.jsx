@@ -11,6 +11,7 @@ export default function Navbar() {
     } 
 
     const [admin,setadmin] = useState();
+    const [profile,setprofile] = useState("https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png")
     // const {user} = useUser();
 
         //   useEffect(()=>{
@@ -19,23 +20,13 @@ export default function Navbar() {
         if (loading && !student) {
           console.log("Loading authentication data...");
       }
-          console.log(student);
+        //   console.log(student);
             // setadmin(student?.name)
             // console.log(admin);
         } catch (err) {
           console.log(err);
         }
         // })
-
-        // useEffect(()=>{
-        //     if(!loading && student){
-        //         setadmin(student.name);
-        //         console.log(admin);
-        //     }
-        // },[student,loading])
-
-        
-
   return (
     <div>
          <nav  className=" top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-lg py-4">
@@ -46,7 +37,7 @@ export default function Navbar() {
                 {/* <!-- Logo --> */}
                 <div>
                     <h2  className="text-3xl font-bold text-indigo-500">
-                         HostelHub
+                        <a href='/'>HostelHub</a> 
                     </h2>
                 </div>
 {/* 
@@ -87,7 +78,9 @@ export default function Navbar() {
                     </ul>
 
                     <div className='flex items-center bg-indigo-500 text-white rounded-4xl px-5 p-2'>
-                    <div  className="bg-while rounded-full w-10 h-10  border-white border-2"></div>
+                    <div  className="bg-while rounded-full w-10 h-10  border-white border-2">
+                        <img src={profile} alt='student-profile' className='rounded-full p-0.5'/>
+                    </div>
                     <button 
                     onClick={handleissue}
                          className="flex items-center gap-2 px-1 py-2 rounded-full hover:bg-indigo-50 hover:text-indigo-500 transition font-medium"

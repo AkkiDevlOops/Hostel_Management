@@ -1,4 +1,2 @@
-
-
 const dateid = new Date().toISOString()
-console.log(dateid.slice(0,10));
+console.log(date.slice(0,12));
