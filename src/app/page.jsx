@@ -33,29 +33,13 @@ export default function Home() {
           console.log(student);
             setOpen(false);
             setIsLogin(true);
+            setUser(student.name);
             console.log(open,isLogin);
         } catch (error) {
           console.log(err);
         }
         })
 
-    //getUser
-    // useEffect(()=>{
-    //   async function getUser() {
-    //       const response = await fetch("/api/student/profile", {
-    //     method: "GET",
-    //     // body: JSON.stringify(),
-    // })
-    // const data = await response.json();
-    
-    // console.log(data.student);
-    // if(data.message === "Welcome!"){
-    //     
-    // }
-    //   }
-    
-    //   getUser();
-    // },[]);
 
     async function handleissue() {
             underwork()
@@ -107,8 +91,7 @@ export default function Home() {
    <>
   <div>
     
- <Navbar/>
-
+ 
 {/* ----- LOGIN WINDOW --------- */}
 
 

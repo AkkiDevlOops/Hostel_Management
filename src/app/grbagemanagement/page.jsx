@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Image from "next/image";
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import { useAuth } from '@/context/context';
 
 
 export default function grbagemanagement(){
@@ -20,6 +21,8 @@ export default function grbagemanagement(){
 //     }
 //   )
 // }
+
+const {student,loading} = useAuth();
 
 const [img,setimg] = useState();
 const [pimg,setpimg] = useState(false);
@@ -47,22 +50,17 @@ formData.append("field2",field2);
 formData.append("field3",field3);
 // formData.append("image",img);
 
-
-async function getid() {
-  try{
-  const response = await fetch("/api/student/session",{
-    method: "POST",
-    headers : {
-      "Content-Type" : "application/json"
-    },
-    body: JSON.stringify()
-  })
-  const data = await response.json()
-  console.log(data.student);
-}catch(err){
-  console.log(err);
-}
-}
+ try {
+         
+        if (loading && !student) {
+          console.log("Loading authentication data...");
+      }
+          console.log(student);
+            // setadmin(student?.name)
+            // console.log(admin);
+        } catch (err) {
+          console.log(err);
+        }
 
 
 
@@ -89,6 +87,7 @@ async function submitHandler(e) {
     console.log(error);
   }
 }
+
 
 // async function handleimg (e) {
 //     try{

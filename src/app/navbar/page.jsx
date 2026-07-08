@@ -86,23 +86,21 @@ export default function Navbar() {
                         </li>
                     </ul>
 
-                    <div className='flex items-center bg-indigo-500 text-white rounded-4xl px-5 p-2'>
-                    <div  className="bg-while rounded-full w-10 h-10  border-white border-2"></div>
+                    
+
                     <button 
                     onClick={handleissue}
-                         className="flex items-center gap-2 px-1 py-2 rounded-full hover:bg-indigo-50 hover:text-indigo-500 transition font-medium"
+                         className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-indigo-50 hover:text-indigo-500 transition font-medium"
                          >
                         <i  className="fas fa-user"></i>
-                        <span id="username">{student?.name}</span>
-                        
+                        <span id="username">{admin}</span>
                     </button>
-                    </div>
+                    <div  className="bg-while rounded-full w-5 h-5 border-black border-2"></div>
                 </div>
-                
+
                 {/* <!-- Mobile Menu Button --> */}
                 <button  className="md:hidden text-2xl text-gray-700" >
                     <i  className="fas fa-bars"></i>
-                    {student?.name}
                 </button>
             </div>
 
