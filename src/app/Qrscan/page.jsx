@@ -37,6 +37,7 @@ CheckQR(value[0].rawValue);
 
 async function CheckQR(qrdata) {
   const response = await fetch("/api/student/Qrscan",{
+    credentials: "include",
    method:"POST",
    headers: {
   "Content-Type": "application/json",

@@ -13,6 +13,7 @@ const [Open,setOpen] = useState(false);
 
   async function gettoken() {
   const response = await fetch("/api/student/attendance", {
+    credentials: "include",
     method: "POST",
   });
 

@@ -27,13 +27,13 @@ export default function ComplaintsPage() {
 
        async function getComplaints() {
        const response = await fetch("/api/student/complain"
-      //   ,{
+        ,{credentials: "include",
       //     method: "POST",
       //   headers:{
       //     "content-type" : "application/json"
       //   },
       //   body: JSON.stringify()
-      //  }
+       }
       );
       const data = await response.json();
       complaints = data.Garbage

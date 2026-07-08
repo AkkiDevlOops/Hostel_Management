@@ -68,9 +68,8 @@ async function submitHandler(e) {
   e.preventDefault();
   try {
     const response = await fetch("/api/student/garbage",{
+      credentials: "include",
       method: "POST",
-      
-    
     body : 
         formData,
       
