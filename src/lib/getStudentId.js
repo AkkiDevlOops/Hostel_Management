@@ -1,6 +1,7 @@
 export default async function () {
         try {
             const response = await fetch(url,{
+                credentials: "include",
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json",
