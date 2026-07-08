@@ -7,11 +7,10 @@ export async function getUser() {
         method: "GET",
     })
     const data = await response.json();
-    if(!response.ok){
-        throw new Error(response.status,response.json)
-    }
-    
-    
+    if (!response.ok || !data.session) {
+    return null;
+}
+    console.log(data);
     const student = data.session.session.student;
     // if(response.ok){
     //  console.log(student)

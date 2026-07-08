@@ -9,9 +9,12 @@ export async function GET() {
 
     let student;
     
-    if(!session){
-    return NextResponse.json("No complaints Found");
-    }
+    if (!session) {
+    return NextResponse.json({
+        Garbage: [],
+        msg: "No session found"
+    });
+}
 
     const value = session.value
         student = await prisma.session.findUnique({
@@ -20,18 +23,24 @@ export async function GET() {
             }
         })
 
-        if(!student){
-            return NextResponse.json("Session was not found Login first");
-        }
+        if (!student) {
+    return NextResponse.json({
+        Garbage: [],
+        msg: "Session not found. Login first."
+    });
+}
 
         const Garbage = await prisma.Garbage.findMany({
             where:{
                 name : student.studentId,
             }
         })
-        if(!Garbage){
-            return NextResponse.json("You have not made any complaints")
-        }
+        if (Garbage.length === 0) {
+    return NextResponse.json({
+        Garbage: [],
+        msg: "You have not made any complaints"
+    });
+}
     return NextResponse.json({Garbage: Garbage,
         msg: "Complaints fetched Successfully"
     })

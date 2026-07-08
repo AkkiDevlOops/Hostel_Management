@@ -5,9 +5,12 @@ import prisma from "@/lib/prisma";
 export async function GET() {
     try{
     const cookieStore = await cookies();
-    const sessionId = cookieStore.get("sessionId");
+    console.log(cookieStore.getAll());
 
-    console.log(sessionId);
+const sessionId = cookieStore.get("sessionId");
+    // const sessionId = cookieStore.get("sessionId");
+
+    // console.log(sessionId);
 
     if(!sessionId){
         return NextResponse.json({msg: "SessionId not found"})

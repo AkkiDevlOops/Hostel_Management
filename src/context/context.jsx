@@ -10,7 +10,7 @@ const Authcontext = createContext();
 
 export const AuthProvider = ({children})=> {
 
-     const [student,setstudent] = useState("");
+     const [student,setstudent] = useState(null);
  const [loading,setloading] = useState(true)
    
     useEffect(()=>{

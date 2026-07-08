@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { getUser } from "@/lib/getuser";
 import { useAuth } from "@/context/context";
 
-let complaints = [ ];
 
 export default function ComplaintsPage() {
 
@@ -12,6 +11,7 @@ export default function ComplaintsPage() {
 
      const[studentData,setstudentData] = useState([]);
      const[id, setid] = useState("")
+     const[complaints,setcomplaints] = useState([]);
     
     try {
      
@@ -36,9 +36,7 @@ export default function ComplaintsPage() {
        }
       );
       const data = await response.json();
-      complaints = data.Garbage
-      const date = complaints[0].createdAT
-      console.log();
+      setcomplaints(data.Garbage || []);
     }
 
     useEffect(()=>{
