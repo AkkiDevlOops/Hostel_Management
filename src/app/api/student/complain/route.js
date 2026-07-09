@@ -20,7 +20,6 @@ export async function POST() {
             }
         })
 
-         return NextResponse.json(Garbage);
     }
  
         if (Garbage.length === 0) {
