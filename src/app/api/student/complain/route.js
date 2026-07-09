@@ -17,7 +17,7 @@ export async function POST() {
             }
         })
 
-         return NextResponse.json(Garbage[0].id);
+         return NextResponse.json(Garbage);
  
 //         if (Garbage.length === 0) {
 //     return NextResponse.json({

@@ -36,8 +36,10 @@ export default function ComplaintsPage() {
        }
       );
       const data = await response.json();
-
-         console.log(data);
+      if(data){
+        console.log(data);
+      }
+         
 
       setcomplaints(data.Garbage || []);
     }
