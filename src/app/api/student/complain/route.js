@@ -19,13 +19,15 @@ export async function POST() {
         if (Garbage.length === 0) {
     return NextResponse.json({
         Garbage: [],
-        msg: "You have not made any complaints"
+        msg : "You have not made any complaints"
     });
 }
     return NextResponse.json({Garbage: Garbage,
         msg: "Complaints fetched Successfully"
     })
      } catch (error) {
+    //  return NextResponse.json( { message: "Session cookie not found" },
+    // { status: 401 })    
      return NextResponse.json( { message: "Session cookie not found" },
     { status: 401 })    
     }
