@@ -30,12 +30,12 @@ export default function Home() {
         if (loading) {
           console.log("Loading authentication data...");
       }
-          console.log(student);
+        //   console.log(student);
             setOpen(false);
             setIsLogin(true);
             setUser(student.name);
             console.log(open,isLogin);
-        } catch (error) {
+        } catch (err) {
           console.log(err);
         }
         })
@@ -77,8 +77,8 @@ export default function Home() {
             }
             
             if(data.msg=="Login success"){
-                setOpen(false);
-                setIsLogin(true);
+                // setOpen(false);
+                // setIsLogin(true);
                 // getuser(data.sid);
                 console.log("done")       
             }

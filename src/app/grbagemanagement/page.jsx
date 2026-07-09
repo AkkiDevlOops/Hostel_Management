@@ -57,7 +57,7 @@ formData.append("name",name);
         if (loading && !student) {
           console.log("Loading authentication data...");
       }
-          console.log(student);
+          // console.log(student);
             
         } catch (err) {
           console.log(err);

@@ -13,7 +13,7 @@ export async function POST(req) {
   const {email,password} = data;
   
 
-  const student = await prisma.student.findMany({
+  const student = await prisma.student.findUnique({
   where: {
     email: email,
   },
@@ -30,13 +30,12 @@ if(!student){
     });
 }
 
-
-console.log(student[0].id);
+console.log(student.id);
 
 let sid;
 
 if(student){
-  sid = student[0].id;
+  sid = student.id;
 }else{
   return NextResponse({msg :"Student was not found"})
 }
@@ -45,7 +44,7 @@ if(student){
 const expire = new Date(Date.now() + 24*60*60*1000);
 
 
-const passcheck = await bcrypt.compare(password,student[0].password)
+const passcheck = await bcrypt.compare(password,student.password)
 
   if(!passcheck){
     
@@ -98,13 +97,11 @@ const cookieStore = await cookies();
       path: "/",
       maxAge : 24*60*60,
     })
-    console.log("cookie created");
+    console.log(cookieStore);
 
   console.log("User found")
     return NextResponse.json({
         msg:"Login success",
-        // sid : sid,
-       // token,
     })
 }
   catch(err){

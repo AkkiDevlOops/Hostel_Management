@@ -6,7 +6,7 @@ export async function GET() {
     try {
     const cookieStore = await cookies()
     const session = cookieStore.get("sessionId")
-
+    console.log(session)
     let student;
     
     if (!session) {

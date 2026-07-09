@@ -3,11 +3,7 @@ import { getUser } from "@/lib/getuser";
 import { createContext, useContext, useEffect, useState } from "react";
 
 
-   
 const Authcontext = createContext();
-
-
-
 export const AuthProvider = ({children})=> {
 
      const [student,setstudent] = useState(null);
@@ -17,7 +13,9 @@ export const AuthProvider = ({children})=> {
         async function loadUser() {
 
     try{
-        const data = await getUser();
+        const response = await fetch("/api/student/getuser");
+        const data =await response.json();
+        // console.log("--------------------")
         // console.log(data);
         setstudent(data);
         

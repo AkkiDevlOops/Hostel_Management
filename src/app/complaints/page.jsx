@@ -18,7 +18,7 @@ export default function ComplaintsPage() {
     if (loading) {
       console.log("Loading authentication data...");
   }
-    console.log(student?.id);
+    // console.log(student?.id);
     
       
     } catch (error) {
@@ -28,14 +28,15 @@ export default function ComplaintsPage() {
        async function getComplaints() {
        const response = await fetch("/api/student/complain"
         ,{credentials: "include",
-      //     method: "POST",
-      //   headers:{
-      //     "content-type" : "application/json"
-      //   },
-      //   body: JSON.stringify()
+          method: "GET",
+        headers:{
+          "content-type" : "application/json"
+        },
+        body: JSON.stringify()
        }
       );
       const data = await response.json();
+      // console.log(data);
       setcomplaints(data.Garbage || []);
     }
 

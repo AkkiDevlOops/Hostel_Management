@@ -5,12 +5,11 @@ import prisma from "@/lib/prisma";
 export async function GET() {
     try{
     const cookieStore = await cookies();
-    console.log(cookieStore.getAll());
+    // const cook = cookieStore.getAll();
+    // console.log(cook);
 
-const sessionId = cookieStore.get("sessionId");
-    // const sessionId = cookieStore.get("sessionId");
+   const sessionId = cookieStore.get('sessionId');
 
-    // console.log(sessionId);
 
     if(!sessionId){
         return NextResponse.json({msg: "SessionId not found"})
@@ -28,8 +27,9 @@ const sessionId = cookieStore.get("sessionId");
   }
     }).catch(()=>console.log(err))
 
-    const data = {session}
-    // console.log(data.session.student.id)
+    const data = session;
+   
+    
 
     if(!session){
         console.log("Unauthorized")
@@ -39,22 +39,28 @@ const sessionId = cookieStore.get("sessionId");
         )
     }
 
-    const sid = data.session.student.id;
+    if(data.student===0){
+        return NextResponse.json({msg: "Unauthorized"},{
+            status:"401"
+        })
+    }
+     
+    const sid = data.student.id;
     
-
+   
     const student = await prisma.student.findUnique({
         where:{
             id : sid,
         }
     })
-
+ 
     
 
     if(!student){
         console.log("student with this session not found")
         return NextResponse.json({msg:"student with this session not found"});
     }
-     
+
     return NextResponse.json({ message: "Welcome!",
         session : data,
         student : student,

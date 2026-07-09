@@ -1,17 +1,21 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { getUser } from "@/lib/getuser";
+import { getcurruser } from "@/lib/auth";
+import { cookies } from "next/headers";
 
-export async function POST() {
+export async function GET() {
     try {
-         const data = await getUser();
-    console.log(data);
-    return NextResponse.json({data})
+         const user = await getcurruser();
+        console.log (user)
+         if(!user){
+            return NextResponse.json("user not found ")
+         }
+    
+    return NextResponse.json(user);
     } catch (error) {
-       console.log(error) 
+       console.log(error)
+       return NextResponse.json(error) 
     }
-
-  
 }
 
 

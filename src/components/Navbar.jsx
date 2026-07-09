@@ -6,7 +6,8 @@ import { useAuth } from '@/context/context';
 
 export default function Navbar() {
     const {student,loading} = useAuth();
-     async function handleissue() {
+    
+    async function handleissue() {
         underwork()
     } 
 
@@ -14,7 +15,7 @@ export default function Navbar() {
     const [profile,setprofile] = useState("https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png")
     // const {user} = useUser();
 
-        //   useEffect(()=>{
+
         try {
          
         if (loading && !student) {
@@ -26,7 +27,10 @@ export default function Navbar() {
         } catch (err) {
           console.log(err);
         }
-        // })
+                  useEffect(()=>{
+        })
+
+        
   return (
     <div>
          <nav  className=" top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-lg py-4">
