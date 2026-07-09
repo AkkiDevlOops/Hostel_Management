@@ -12,7 +12,7 @@ export default function Home() {
       const { student,loading } = useAuth();
       const [admin, setadmin] = useState(false);
       const [open, setOpen] = useState(true);
-      const [isLogin, setIsLogin] = useState(true);
+      const [isLogin, setIsLogin] = useState(false);
       const [email, setemail] = useState("");
       const [name, setname] = useState("");
       const [Enrollment, setEnrollment] = useState("");
@@ -32,12 +32,12 @@ export default function Home() {
       }
 
         //   console.log(student);
+        if(student.name != null){
             setOpen(false);
             setIsLogin(true);
-
+        }
           console.log(student);
-            // setOpen(false);
-            // setIsLogin(true);
+            
 
             setUser(student.name);
             console.log(open,isLogin);
@@ -83,8 +83,8 @@ export default function Home() {
             }
             
             if(data.msg=="Login success"){
-                // setOpen(false);
-                // setIsLogin(true);
+                setOpen(false);
+                setIsLogin(true);
                 // getuser(data.sid);
                 console.log("done")       
             }
@@ -215,7 +215,7 @@ export default function Home() {
 
             <div  className="flex flex-col sm:flex-row justify-center gap-4">
 
-                <button 
+                <button onClick={()=>setOpen(true)}
                      className="border-2 border-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-indigo-600 transition">
                     Get Started
                 </button>
