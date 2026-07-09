@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 
 export async function POST() {
-    // try {
+    try {
      const data = await getcurruser();
      console.log(data);
      const id = data.id
@@ -31,10 +31,14 @@ export async function POST() {
 //     return NextResponse.json({Garbage: Garbage,
 //         msg: "Complaints fetched Successfully"
 //     })
-//      } catch (error) {
-//     //  return NextResponse.json( { message: "Session cookie not found" },
-//     // { status: 401 })    
-//      return NextResponse.json( { message: "Session cookie not found" },
-//     { status: 401 })    
-//     }
+     } catch (error) {
+  console.error(error);
+  return NextResponse.json(
+    {
+      error: error.message,
+      stack: error.stack,
+    },
+    { status: 500 }
+  );
+}
    }
