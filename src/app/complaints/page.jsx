@@ -28,11 +28,7 @@ export default function ComplaintsPage() {
        async function getComplaints() {
        const response = await fetch("/api/student/complain"
         ,{credentials: "include",
-<<<<<<< HEAD
-          method: "GET",
-=======
           method: "POST",
->>>>>>> 46e7c9f89a1899a10463aaf4c7d25595cf008654
         headers:{
           "content-type" : "application/json"
         },
@@ -40,11 +36,9 @@ export default function ComplaintsPage() {
        }
       );
       const data = await response.json();
-<<<<<<< HEAD
-      // console.log(data);
-=======
+
          console.log(data.Garbage);
->>>>>>> 46e7c9f89a1899a10463aaf4c7d25595cf008654
+
       setcomplaints(data.Garbage || []);
     }
 
