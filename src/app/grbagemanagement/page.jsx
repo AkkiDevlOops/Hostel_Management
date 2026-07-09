@@ -8,20 +8,6 @@ import { useAuth } from '@/context/context';
 
 export default function grbagemanagement(){
 
-// const getUserLocation = ()=>{
-//   navigator.geolocation.getCurrentPosition(
-//     (position)=>{
-//       setuserLocation({
-//       lat: position.coords.latitude,
-//       long: position.coords.longitude
-//       });
-//     },
-//     (error) =>{
-//       alert("location access denied");
-//     }
-//   )
-// }
-
 const {student,loading} = useAuth();
 
 const [img,setimg] = useState();
@@ -33,17 +19,7 @@ const [field3, setfield3] = useState("");
 const [name, setname] = useState("");
 const [user,setUser] = useState("");
 const [complainid, setComplainid] = useState("");
- 
-// async function handleimage(e) {
-//   e.preventDefault();
 
-//   // const files = Array.from(e.target.files);
-//   const file = e.target.file
-//   const url = URL.createObjectURL(file)
-//   // const urls =  files.map(files =>URL.createObjectURL(files));
-//   setpreview(url);
-//   console.log(url);
-// }
 
 const formData = new FormData();
 formData.append("field1",field1);
@@ -57,7 +33,7 @@ formData.append("name",name);
         if (loading && !student) {
           console.log("Loading authentication data...");
       }
-          // console.log(student);
+          console.log(student);
             
         } catch (err) {
           console.log(err);
@@ -78,7 +54,7 @@ async function submitHandler(e) {
   if(data){
     setComplainid(data.date);
     alert(data.msg);
-    console.log(data);
+    console.log(data.data);
   }
 
 } catch (error) {
