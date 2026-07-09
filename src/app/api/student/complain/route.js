@@ -9,7 +9,7 @@ export async function POST() {
      const data = await getcurruser();
      console.log(data);
      const id = data.id
-     return NextResponse(data);
+     return NextResponse.json(data);
 
 //         const Garbage = await prisma.Garbage.findMany({
 //             where:{
