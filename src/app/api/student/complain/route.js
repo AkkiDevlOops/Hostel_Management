@@ -1,38 +1,19 @@
+import { getcurruser } from "@/lib/auth";
+import { getUser } from "@/lib/getuser";
 import prisma from "@/lib/prisma";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+
 
 export async function POST() {
     try {
-    const cookieStore = await cookies()
-    const session = cookieStore.get("sessionId")
-    console.log(session)
-    let student;
+     const data = await getcurruser();
+     console.log(data);
+     const id = data.id
     
-    if (!session) {
-    return NextResponse.json({
-        Garbage: [],
-        msg: "No session found"
-    });
-}
-
-    const value = session.value
-        student = await prisma.session.findUnique({
-            where : {
-                id : value,
-            }
-        })
-
-        if (!student) {
-    return NextResponse.json({
-        Garbage: [],
-        msg: "Session not found. Login first."
-    });
-}
 
         const Garbage = await prisma.Garbage.findMany({
             where:{
-                name : student.studentId,
+                name : id,
             }
         })
         if (Garbage.length === 0) {
