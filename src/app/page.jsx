@@ -30,9 +30,15 @@ export default function Home() {
         if (loading) {
           console.log("Loading authentication data...");
       }
+<<<<<<< HEAD
         //   console.log(student);
             setOpen(false);
             setIsLogin(true);
+=======
+          console.log(student);
+            // setOpen(false);
+            // setIsLogin(true);
+>>>>>>> 46e7c9f89a1899a10463aaf4c7d25595cf008654
             setUser(student.name);
             console.log(open,isLogin);
         } catch (err) {
