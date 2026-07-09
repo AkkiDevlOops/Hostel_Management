@@ -16,13 +16,18 @@ export async function POST() {
                 name : id,
             }
         })
-  return NextResponse.json(Garbage);
+
+         return NextResponse.json(Garbage[0]);
+ 
 //         if (Garbage.length === 0) {
 //     return NextResponse.json({
 //         Garbage: [],
 //         msg : "You have not made any complaints"
 //     });
 // }
+
+  
+
 //     return NextResponse.json({Garbage: Garbage,
 //         msg: "Complaints fetched Successfully"
 //     })
