@@ -23,18 +23,18 @@ export async function POST() {
          return NextResponse.json(Garbage);
     }
  
-//         if (Garbage.length === 0) {
-//     return NextResponse.json({
-//         Garbage: [],
-//         msg : "You have not made any complaints"
-//     });
-// }
+        if (Garbage.length === 0) {
+    return NextResponse.json({
+        Garbage: [],
+        msg : "You have not made any complaints"
+    });
+}
 
   
 
-//     return NextResponse.json({Garbage: Garbage,
-//         msg: "Complaints fetched Successfully"
-//     })
+    return NextResponse.json({Garbage: Garbage,
+        msg: "Complaints fetched Successfully"
+    })
      } catch (error) {
   console.error(error);
   return NextResponse.json(
