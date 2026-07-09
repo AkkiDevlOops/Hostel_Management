@@ -10,17 +10,17 @@ export async function POST() {
      console.log(data);
      const id = data.id
 
-     const garbage = await prisma.garbage.findMany();
-     return NextResponse.json(garbage);
+    //  const garbage = await prisma.garbage.findMany();
+    //  return NextResponse.json(garbage);
    
 
-        // const Garbage = await prisma.Garbage.findMany({
-        //     where:{
-        //         name : id,
-        //     }
-        // })
+        const Garbage = await prisma.Garbage.findMany({
+            where:{
+                name : id,
+            }
+        })
 
-        //  return NextResponse.json(Garbage);
+         return NextResponse.json(Garbage);
  
 //         if (Garbage.length === 0) {
 //     return NextResponse.json({
