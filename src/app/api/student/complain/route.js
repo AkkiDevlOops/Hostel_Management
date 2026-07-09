@@ -13,14 +13,14 @@ export async function POST() {
     //  const garbage = await prisma.garbage.findMany();
     //  return NextResponse.json(garbage);
    
-        if(id){
+    
         const Garbage = await prisma.Garbage.findMany({
             where:{
                 name : id,
             }
         })
 
-    }
+    
  
         if (Garbage.length === 0) {
     return NextResponse.json({
